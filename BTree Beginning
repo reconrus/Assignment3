@@ -1,0 +1,100 @@
+import java.util.ArrayList;
+
+
+public class Node <K extends Comparable<K>> {
+
+    private static int order;
+    private Node<K> parent;
+
+    ArrayList<K> keys;
+    ArrayList<Node<K>> references;
+
+
+    Node(Node<K> parent, int order){
+
+        this.parent = parent;
+        this.order = order;
+
+        references = new ArrayList<>();
+        keys = new ArrayList<>();
+    }
+
+    Node(Node<K> parent){
+
+        this.parent = parent;
+        this.order = order;
+
+        references = new ArrayList<>();
+        keys = new ArrayList<>();
+    }
+
+    protected boolean contains (K k){
+
+        boolean ret = false;
+
+        for (int i = 0; i < keys.size(); i++) {
+
+            if (keys.get(i) == null) break;
+            if (keys.get(i).compareTo(k) < 0) {
+
+                if (i != keys.size() - 1 && keys.get(i + 1).compareTo(k) > 0) {
+
+                    Node<K> nextNode = next(k);
+                    if(nextNode!=null) ret = nextNode.contains(k);
+
+                } else continue;
+            }
+            if(keys.get(i).compareTo(k) == 0) return true;
+
+            return false;
+        }
+        return true;
+    }
+
+    protected boolean isFull(int order){
+        if(keys.size() == order - 1)
+            return true;
+        else return false;
+    }
+
+    protected void add(K k){
+
+
+
+    }
+
+    /**
+     * Looks for a subtree that could contain the key k
+     * @param k - sought key
+     * @return a root of a subtree that could contain the key k
+     */
+   protected Node<K> next(K k){
+
+       for(Node<K> node:references){
+
+           if(node.keys.get(0).compareTo(k) <= 0 && node.keys.get(keys.size()-1).compareTo(k) >=0) return node;
+
+       }
+
+        return null;
+   }
+
+
+   protected void split(){
+
+        if(parent == null){
+
+            Node<K> newRoot = new Node<K>(null);
+
+
+
+
+
+        }
+
+
+
+
+   }
+
+}
